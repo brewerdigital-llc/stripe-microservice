@@ -9,8 +9,8 @@ def lambda_handler(event, context):
 
     print("Received event: " + json.dumps(event, indent=2))
     try:
-        amount = event['body']['amount']
-
+        body = json.loads(event['body'])
+        amount = body['amount']
         # Create a payment intent without confirming it
         payment_intent = stripe.PaymentIntent.create(
             amount=amount,
@@ -23,6 +23,13 @@ def lambda_handler(event, context):
             "body": json.dumps({
                 "amount": amount,
                 "paymentIntentId": payment_intent.id,
+            }),
+        }
+    except json.JSONDecodeError:
+        return {
+            "statusCode": 400,
+            "body": json.dumps({
+                "error": "Invalid JSON format in event body.",
             }),
         }
     except stripe.error.StripeError as e:
@@ -40,7 +47,7 @@ def lambda_handler(event, context):
         return {
             "statusCode": 500,
             "body": json.dumps({
-                "error": "An unexpected error occurred.",
+                "error": str(e),
                 "event": event,
             }),
         }
