@@ -5,25 +5,24 @@ import os
 stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
 
 def lambda_handler(event, context):
-    """Lambda function to create a payment intent without confirming it"""
+    """Lambda function to confirm a payment intent"""
 
     print("Received event: " + json.dumps(event, indent=2))
     try:
         body = json.loads(event['body'])
-        amount = body['amount']
-        # Create a payment intent without confirming it
-        payment_intent = stripe.PaymentIntent.create(
-            amount=amount,
-            currency="usd",
-            confirm=False
-        )
+        payment_intent_id = body['payment_intent_id']
+
+        # Retrieve the payment intent
+        payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+
+        # Confirm the payment intent
+        payment_intent.confirm()
 
         return {
             "statusCode": 200,
             "body": json.dumps({
-                "amount": amount,
                 "paymentIntentId": payment_intent.id,
-                "clientSecret": payment_intent.client_secret,
+                "status": payment_intent.status,
             }),
         }
     except json.JSONDecodeError:

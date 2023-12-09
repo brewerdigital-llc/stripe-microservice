@@ -24,6 +24,20 @@ Resources:
           Properties:
             Path: /payment_intent
             Method: post
+  ConfirmPaymentIntentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: confirm_payment_intent/
+      Handler: app.lambda_handler
+      Runtime: python3.10
+      Architectures:
+      - x86_64
+      Events:
+        ConfirmPaymentIntentApi:
+          Type: Api
+          Properties:
+            Path: /payment_intent
+            Method: put
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -38,3 +52,12 @@ Outputs:
   CreatePaymentIntentFunctionIamRole:
     Description: Implicit IAM Role created for Hello World function
     Value: !GetAtt CreatePaymentIntentFunctionRole.Arn
+  ConfirmPaymentIntentApi:
+    Description: API Gateway endpoint URL for Prod stage for Confirm Payment Intent function
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/confirm/"
+  ConfirmPaymentIntentFunction:
+    Description: Confirm Payment Intent Lambda Function ARN
+    Value: !GetAtt ConfirmPaymentIntentFunction.Arn
+  ConfirmPaymentIntentFunctionIamRole:
+    Description: Implicit IAM Role created for Confirm Payment Intent function
+    Value: !GetAtt ConfirmPaymentIntentFunctionRole.Arn
