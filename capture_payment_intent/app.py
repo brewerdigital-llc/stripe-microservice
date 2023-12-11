@@ -10,13 +10,13 @@ def lambda_handler(event, context):
     print("Received event: " + json.dumps(event, indent=2))
     try:
         body = json.loads(event['body'])
-        payment_intent_id = body['payment_intent_id']
+        payment_intent_id = body['id']
 
         # Retrieve the payment intent
         payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
 
         # Confirm the payment intent
-        payment_intent.confirm()
+        payment_intent.capture()
 
         return {
             "statusCode": 200,

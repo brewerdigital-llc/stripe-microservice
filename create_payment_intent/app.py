@@ -15,7 +15,8 @@ def lambda_handler(event, context):
         payment_intent = stripe.PaymentIntent.create(
             amount=amount,
             currency="usd",
-            confirm=False
+            confirm=False,
+            capture_method="manual",
         )
 
         return {

@@ -27,7 +27,7 @@ Resources:
   ConfirmPaymentIntentFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: confirm_payment_intent/
+      CodeUri: capture_payment_intent/
       Handler: app.lambda_handler
       Runtime: python3.10
       Architectures:

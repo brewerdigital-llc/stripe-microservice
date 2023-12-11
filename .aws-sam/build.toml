@@ -10,8 +10,8 @@ manifest_hash = "2bc3d1d916b28e165d57eaae207c1dad"
 packagetype = "Zip"
 functions = ["CreatePaymentIntentFunction"]
 
-[function_build_definitions.54d98753-b363-43c1-a147-aa190cd01720]
-codeuri = "/Users/spencerromberg/Repos/BrewerDigital/fhir-app/stripe-ms/confirm_payment_intent"
+[function_build_definitions.e5fa7311-3fd3-4405-a773-9cc93776d3d4]
+codeuri = "/Users/spencerromberg/Repos/BrewerDigital/fhir-app/stripe-ms/capture_payment_intent"
 runtime = "python3.10"
 architecture = "x86_64"
 handler = "app.lambda_handler"
