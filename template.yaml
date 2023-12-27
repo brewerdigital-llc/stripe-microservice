@@ -38,6 +38,20 @@ Resources:
           Properties:
             Path: /payment_intent
             Method: put
+  CancelPaymentIntentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: cancel_payment_intent/
+      Handler: app.lambda_handler
+      Runtime: python3.10
+      Architectures:
+        - x86_64
+      Events:
+        CancelPaymentIntentApi:
+          Type: Api
+          Properties:
+            Path: /payment_intent
+            Method: delete
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -61,3 +75,12 @@ Outputs:
   ConfirmPaymentIntentFunctionIamRole:
     Description: Implicit IAM Role created for Confirm Payment Intent function
     Value: !GetAtt ConfirmPaymentIntentFunctionRole.Arn
+  CancelPaymentIntentApi:
+    Description: API Gateway endpoint URL for Prod stage for Cancel Payment Intent function
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/cancel/"
+  CancelPaymentIntentFunction:
+    Description: Cancel Payment Intent Lambda Function ARN
+    Value: !GetAtt CancelPaymentIntentFunction.Arn
+  CancelPaymentIntentFunctionIamRole:
+    Description: Implicit IAM Role created for Cancel Payment Intent function
+    Value: !GetAtt CancelPaymentIntentFunctionRole.Arn

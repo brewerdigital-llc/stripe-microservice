@@ -19,4 +19,13 @@ manifest_hash = "2bc3d1d916b28e165d57eaae207c1dad"
 packagetype = "Zip"
 functions = ["ConfirmPaymentIntentFunction"]
 
+[function_build_definitions.28dd7269-1d8b-4131-9e57-60f4d0a58b9e]
+codeuri = "/Users/spencerromberg/Repos/BrewerDigital/fhir-app/stripe-ms/cancel_payment_intent"
+runtime = "python3.10"
+architecture = "x86_64"
+handler = "app.lambda_handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["CancelPaymentIntentFunction"]
+
 [layer_build_definitions]
