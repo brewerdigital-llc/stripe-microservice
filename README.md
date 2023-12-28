@@ -40,13 +40,6 @@ The following table lists the endpoints and associated Lambda functions of the a
 
 You must supply the AWS API Gateway with a valid API key in the `X-Api-Key` header of the request. The API key is defined under API Keys at https://us-east-2.console.aws.amazon.com/apigateway/main/api-keys?api=unselected&region=us-east-2, and associated with the API via a Usage Plan at https://us-east-2.console.aws.amazon.com/apigateway/main/usage-plans?region=us-east-2.
 
-## Environment variables
-
-The following environment variables are required to run the application:
-* `STRIPE_API_KEY` - The API key to use for the Stripe API calls.
-
-For cloud operation, you can define these environment variables in the AWS Lambda console under each relevant function at https://us-east-2.console.aws.amazon.com/lambda/home?functions&region=us-east-2#/functions. For testing, you should define these either in your shell or viaa your IDE's runtime configuration.
-
 ## Deploy the microservice
 
 The Serverless Application Model Command Line Interface (SAM CLI) is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
@@ -73,6 +66,13 @@ The first command will build the source of your application. The second command 
 * **Save arguments to samconfig.toml**: If set to yes, your choices will be saved to a configuration file inside the project, so that in the future you can just re-run `sam deploy` without parameters to deploy changes to your application.
 
 You can find your API Gateway Endpoint URL in the output values displayed after deployment.
+
+## Environment variables
+
+The following environment variables are required to run the application:
+* `STRIPE_API_KEY` - The API key to use for the Stripe API calls.
+
+For cloud operation, you can define these environment variables in the AWS Lambda console under each relevant function at https://us-east-2.console.aws.amazon.com/lambda/home?functions&region=us-east-2#/functions. For testing, you should define these either in your shell or viaa your IDE's runtime configuration.
 
 ## Use the SAM CLI to build and test locally
 
