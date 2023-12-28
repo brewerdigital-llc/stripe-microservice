@@ -24,6 +24,22 @@ The AWS Toolkit is an open source plug-in for popular IDEs that uses the SAM CLI
 * [VS Code](https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/welcome.html)
 * [Visual Studio](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html)
 
+## Use
+
+### Service endpoints and associated Lambda functions
+
+The following table lists the endpoints and associated Lambda functions of the application.
+
+| HTTP method | Endpoint | Description | Lambda function | Request body example | Response body example                                                                                                                               |
+| ----------- | -------- | ----------- | --------------- |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| POST | /payment_intents | Create a payment intent | create_payment_intent | `{"amount": 200}` | `{"amount": 100, "paymentIntentId": "pi_000000000000000000000000", "clientSecret": "pi_000000000000000000000000_secret_0000000000000000000000000"}` |
+| POST | /payment_intents/{id}/capture | Capture a payment intent | capture_payment_intent | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "succeeded"}` |
+| POST | /payment_intents/{id}/cancel | Cancel a payment intent | cancel_payment_intent | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "canceled"}` |
+
+### Authentication and Authorization
+
+You must supply the AWS API Gateway with a valid API key in the `X-Api-Key` header of the request. The API key is defined under API Keys for the deployment region at https://us-east-2.console.aws.amazon.com/apigateway/main/apis?api=unselected, and associated with the API via a Usage Plan at https://us-east-2.console.aws.amazon.com/apigateway/main/usage-plans.
+
 ## Deploy the microservice
 
 The Serverless Application Model Command Line Interface (SAM CLI) is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
