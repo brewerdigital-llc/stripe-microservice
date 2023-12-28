@@ -30,15 +30,22 @@ The AWS Toolkit is an open source plug-in for popular IDEs that uses the SAM CLI
 
 The following table lists the endpoints and associated Lambda functions of the application.
 
-| HTTP method | Endpoint | Description | Lambda function | Request body example | Response body example                                                                                                                               |
-| ----------- | -------- | ----------- | --------------- |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| POST | /payment_intents | Create a payment intent | create_payment_intent | `{"amount": 200}` | `{"amount": 100, "paymentIntentId": "pi_000000000000000000000000", "clientSecret": "pi_000000000000000000000000_secret_0000000000000000000000000"}` |
-| POST | /payment_intents/{id}/capture | Capture a payment intent | capture_payment_intent | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "succeeded"}` |
-| POST | /payment_intents/{id}/cancel | Cancel a payment intent | cancel_payment_intent | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "canceled"}` |
+| HTTP method | Endpoint                      | Description              | Lambda function        | Request body example                    | Response body example                                                                                                                               |
+|-------------|-------------------------------|--------------------------|------------------------|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| POST        | /payment_intents              | Create a payment intent  | create_payment_intent  | `{"amount": 200}`                       | `{"amount": 100, "paymentIntentId": "pi_000000000000000000000000", "clientSecret": "pi_000000000000000000000000_secret_0000000000000000000000000"}` |
+| POST        | /payment_intents/{id}/capture | Capture a payment intent | capture_payment_intent | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "succeeded"}`                                                                         |
+| POST        | /payment_intents/{id}/cancel  | Cancel a payment intent  | cancel_payment_intent  | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "canceled"}`                                                                          |
 
 ### Authentication and Authorization
 
-You must supply the AWS API Gateway with a valid API key in the `X-Api-Key` header of the request. The API key is defined under API Keys for the deployment region at https://us-east-2.console.aws.amazon.com/apigateway/main/apis?api=unselected, and associated with the API via a Usage Plan at https://us-east-2.console.aws.amazon.com/apigateway/main/usage-plans.
+You must supply the AWS API Gateway with a valid API key in the `X-Api-Key` header of the request. The API key is defined under API Keys at https://us-east-2.console.aws.amazon.com/apigateway/main/api-keys?api=unselected&region=us-east-2, and associated with the API via a Usage Plan at https://us-east-2.console.aws.amazon.com/apigateway/main/usage-plans?region=us-east-2.
+
+## Environment variables
+
+The following environment variables are required to run the application:
+* `STRIPE_API_KEY` - The API key to use for the Stripe API calls.
+
+For cloud operation, you can define these environment variables in the AWS Lambda console under each relevant function at https://us-east-2.console.aws.amazon.com/lambda/home?functions&region=us-east-2#/functions. For testing, you should define these either in your shell or viaa your IDE's runtime configuration.
 
 ## Deploy the microservice
 
