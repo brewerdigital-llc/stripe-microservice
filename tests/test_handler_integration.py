@@ -6,6 +6,8 @@ import pytest
 import stripe
 
 import create_payment_intent.app
+import capture_payment_intent.app
+import cancel_payment_intent.app
 
 TEST_PAYMENT_AMOUNT = 100
 RETURN_URL = "https://brewerdigital.com"
@@ -54,14 +56,19 @@ class TestHandlerIntegration:
         body = json.loads(payment_intent_creation_result_for_capture["body"])
         payment_intent_id = body['paymentIntentId']
         payment_methods = ['pm_card_visa_chargeDeclined', 'pm_card_visa']
+        payment_intent_event = {'body': f'{{"id": "{payment_intent_id}"}}'}
         for payment_method in payment_methods:
             payment_intent = stripe.PaymentIntent.modify(payment_intent_id, payment_method=payment_method)
             if payment_method == payment_methods[-1]:
                 payment_intent.confirm(return_url=RETURN_URL)
                 assert 'status' in payment_intent
                 assert payment_intent['status'] == 'requires_capture'
-                payment_intent.capture()
-                assert payment_intent.status == 'succeeded'
+                response = capture_payment_intent.app.lambda_handler(payment_intent_event, None)
+                assert response['statusCode'] == HTTPStatus.OK
+                body = json.loads(response['body'])
+                assert 'paymentIntentId' in body
+                assert 'status' in body
+                assert body['status'] == 'succeeded'
             else:
                 with pytest.raises(stripe.error.CardError) as e:
                     payment_intent.confirm(return_url=RETURN_URL)
@@ -71,6 +78,10 @@ class TestHandlerIntegration:
         """Test that the payment intent is canceled."""
         body = json.loads(payment_intent_creation_result_for_cancellation["body"])
         payment_intent_id = body['paymentIntentId']
-        payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
-        payment_intent.cancel()
-        assert payment_intent.status == 'canceled'
+        payment_intent_event = {'body': f'{{"id": "{payment_intent_id}"}}'}
+        response = cancel_payment_intent.app.lambda_handler(payment_intent_event, None)
+        assert response['statusCode'] == HTTPStatus.OK
+        body = json.loads(response['body'])
+        assert 'paymentIntentId' in body
+        assert 'status' in body
+        assert body['status'] == 'canceled'
