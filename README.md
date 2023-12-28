@@ -2,7 +2,7 @@
 
 This project contains source code and supporting files for the FHIR Stripe serverless microservice application that you can deploy with the SAM CLI. It includes the following files and folders.
 
-- hello_world - Code for the application's Lambda function.
+- create_payment_intent, capture_payment_intent, and cancel_payment_intent - Code for the application's Lambda functions.
 - events - Invocation events that you can use to invoke the functions.
 - tests - Integration tests for the application code. 
 - template.yaml - A template that defines the application's AWS resources.
@@ -59,7 +59,7 @@ Build your application with the `sam build --use-container` command.
 stripe-ms$ sam build --use-container
 ```
 
-The SAM CLI installs dependencies defined in `hello_world/requirements.txt`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
+The SAM CLI installs dependencies defined in `*/requirements.txt`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
 
 Test a single function by invoking it directly with a test event. An event is a JSON document that represents the input that the function receives from the event source. Test events are included in the `events` folder in this project.
 
