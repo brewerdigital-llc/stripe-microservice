@@ -61,7 +61,6 @@ class TestHandlerIntegration:
                 assert 'status' in payment_intent
                 assert payment_intent['status'] == 'requires_capture'
                 payment_intent.capture()
-                print(payment_intent)
                 assert payment_intent.status == 'succeeded'
             else:
                 with pytest.raises(stripe.error.CardError) as e:
