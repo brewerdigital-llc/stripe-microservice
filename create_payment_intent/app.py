@@ -1,17 +1,21 @@
 import json
-import stripe
+import logging
 import os
+
+import stripe
 
 stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
 
-def lambda_handler(event, context):
-    """Lambda function to create a payment intent without confirming it"""
 
-    print("Received event: " + json.dumps(event, indent=2))
+def lambda_handler(event, _):
+    """Lambda function to create a payment intent without confirming it."""
+    logging.getLogger().setLevel(logging.DEBUG)
+    logging.info('Received event:\n%s', json.dumps(event, indent=2))
+
     try:
         body = json.loads(event['body'])
         amount = body['amount']
-        # Create a payment intent without confirming it
+        # Create a payment intent without confirming it.
         payment_intent = stripe.PaymentIntent.create(
             amount=amount,
             currency="usd",
@@ -28,6 +32,7 @@ def lambda_handler(event, context):
             }),
         }
     except json.JSONDecodeError:
+        # Handle JSON decode errors.
         return {
             "statusCode": 400,
             "body": json.dumps({
@@ -35,7 +40,7 @@ def lambda_handler(event, context):
             }),
         }
     except stripe.error.StripeError as e:
-        # Handle Stripe errors
+        # Handle Stripe errors.
         return {
             "statusCode": 400,
             "body": json.dumps({
@@ -45,7 +50,7 @@ def lambda_handler(event, context):
         }
 
     except Exception as e:
-        # Handle other unexpected errors
+        # Handle other unexpected errors.
         return {
             "statusCode": 500,
             "body": json.dumps({

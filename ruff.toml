@@ -1,0 +1,26 @@
+select = ["ALL"]
+
+# Ignore some rules.
+ignore = [
+    "ANN001",   # Missing type annotation for function argument
+    "ANN101",   # Missing type annotation for {name} in method
+    "ANN201",   # Missing return type annotation for public function {name}
+    "ANN204",   # Missing return type annotation for special method {name}
+    "BLE001",   # Do not catch blind exception: {name}
+    "D100",     # Missing docstring in public module
+    "D103",     # Missing docstring in public function
+    "D104",     # Missing docstring in public package
+    "D107",     # Missing docstring in __init__
+    "D203",     # 1 blank line required before class docstring
+    "D204",     # 1 blank line required after class docstring
+    "D208",     # Docstring is over-indented
+    "D209",     # Multi-line docstring closing quotes should be on a separate line
+    "D213",     # Multi-line docstring summary should start at the second line
+    "E501",     # Line too long ({width} > {limit} characters)
+    "FA100",    # Missing 'from __future__ import annotations', but uses `{name}`
+    "FA102",    # Missing 'from __future__ import annotations', but uses
+    "PLR0911",  # Too many return statements ({returns} > {max_returns})
+    "Q000",     # Single quotes found but double quotes preferred
+    "S101",     # Use of assert detected.
+    "S105",     # Possible hardcoded password asgned to: '{string}'
+]
