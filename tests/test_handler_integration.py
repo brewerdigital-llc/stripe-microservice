@@ -8,7 +8,6 @@ import stripe
 import create_payment_intent.app
 
 TEST_PAYMENT_AMOUNT = 100
-
 RETURN_URL = "https://brewerdigital.com"
 
 """
