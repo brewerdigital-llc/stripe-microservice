@@ -26,15 +26,15 @@ The AWS Toolkit is an open source plug-in for popular IDEs that uses the SAM CLI
 
 ## Use
 
-### Service endpoints and associated Lambda functions
+### Service endpoints
 
-The following table lists the endpoints and associated Lambda functions of the application.
+The following table lists the endpoints of the microservice.
 
-| HTTP method | Endpoint                      | Description              | Lambda function        | Request body example                    | Response body example                                                                                                                               |
-|-------------|-------------------------------|--------------------------|------------------------|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| POST        | /payment_intents              | Create a payment intent  | create_payment_intent  | `{"amount": 200}`                       | `{"amount": 100, "paymentIntentId": "pi_000000000000000000000000", "clientSecret": "pi_000000000000000000000000_secret_0000000000000000000000000"}` |
-| POST        | /payment_intents/{id}/capture | Capture a payment intent | capture_payment_intent | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "succeeded"}`                                                                         |
-| POST        | /payment_intents/{id}/cancel  | Cancel a payment intent  | cancel_payment_intent  | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "canceled"}`                                                                          |
+| HTTP method | Endpoint         | Description              | Request body example                    | Response body example                                                                                                                               |
+|-------------|------------------|--------------------------|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| POST        | /payment_intents | Create a payment intent  | `{"amount": 200}`                       | `{"amount": 100, "paymentIntentId": "pi_000000000000000000000000", "clientSecret": "pi_000000000000000000000000_secret_0000000000000000000000000"}` |
+| PUT         | /payment_intents | Capture a payment intent | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "succeeded"}`                                                                         |
+| DELETE      | /payment_intents | Cancel a payment intent  | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "canceled"}`                                                                          |
 
 ### Authentication and Authorization
 
