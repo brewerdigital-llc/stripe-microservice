@@ -44,10 +44,10 @@ The following table lists the endpoints of the microservice.
 
 The following workflow is used for payment operations with the microservice:
 
-1. Create a payment intent by sending a `POST` request to the `/payment_intents` endpoint. The response will contain the payment intent ID and client secret.
+1. Create a payment intent by sending a `POST` request to the `/payment_intent` endpoint. The response will contain the payment intent ID and client secret.
 2. Either:
-   1. Send a PUT request to the `/payment_intents` endpoint with the payment intent ID returned in the `POST` response to confirm the payment intent with Stripe; or
-   2. Send a DELETE request to the `/payment_intents` endpoint with the payment intent ID returned in the `POST` response to cancel the payment intent with Stripe.
+   1. Send a `PUT` request to the `/payment_intent` endpoint with the payment intent ID returned in the `POST` response to confirm the payment intent with Stripe; or
+   2. Send a `DELETE` request to the `/payment_intent` endpoint with the payment intent ID returned in the `POST` response to cancel the payment intent with Stripe.
 
 ### Authentication and Authorization
 
