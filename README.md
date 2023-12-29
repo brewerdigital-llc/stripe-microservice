@@ -103,7 +103,7 @@ You can find your API Gateway Endpoint URL in the output values displayed after 
 
 The following environment variables are required to run the application:
 
-* `STRIPE_API_KEY` - The API key you created according to the instructions under **Prerequisites** above to use for the Stripe API calls.
+* `STRIPE_SECRET_KEY` - The API key you created according to the instructions under **Prerequisites** above to use for the Stripe API calls.
 
 For cloud operation, you can define these environment variables in the AWS Lambda console under each relevant function at https://us-east-2.console.aws.amazon.com/lambda/home?functions&region=us-east-2#/functions. For testing, you should define these either in your shell or via your IDE's runtime configuration.
 
@@ -153,7 +153,7 @@ To simplify troubleshooting, SAM CLI has a command called `sam logs`. `sam logs`
 `NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
 
 ```bash
-stripe-ms$ sam logs -n CreatePaymentIntentFunction --stack-name "stripe-ms" --tail
+stripe-ms$ sam logs -n CreatePaymentIntentFunction --stack-name "fhir-stripe-ms" --tail
 ```
 
 You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
@@ -164,11 +164,9 @@ Tests are defined in the `tests` folder in this project. Use PIP to install the 
 
 ```bash
 stripe-ms$ pip install -r tests/requirements.txt --user
-# unit test
-stripe-ms$ python -m pytest tests/unit -v
-# integration test, requiring deploying the stack first.
+# Integration test, requiring deploying the stack first and setting the STRIPE_SECRET_KEY environment variable.
 # Create the env variable AWS_SAM_STACK_NAME with the name of the stack we are testing
-stripe-ms$ AWS_SAM_STACK_NAME="stripe-ms" python -m pytest tests/integration -v
+stripe-ms$ AWS_SAM_STACK_NAME="fhir-stripe-ms" python -m pytest tests/test_handler_integration.py -v
 ```
 
 ### Cleanup
@@ -176,7 +174,7 @@ stripe-ms$ AWS_SAM_STACK_NAME="stripe-ms" python -m pytest tests/integration -v
 To delete the microservice that you created, use the AWS CLI. Assuming you used your project name for the stack name, you can run the following:
 
 ```bash
-sam delete --stack-name "stripe-ms"
+sam delete --stack-name "fhir-stripe-ms"
 ```
 
 ### Resources
