@@ -26,15 +26,28 @@ The AWS Toolkit is an open source plug-in for popular IDEs that uses the SAM CLI
 
 ## Use the pre-deployed microservice
 
+### Base URL
+
+The base URL for the pre-deployed microservice is https://gozj2why30.execute-api.us-east-2.amazonaws.com/Prod.  You can use this URL to make requests to the microservice by appending the below endpoints and applying the corresponding HTTP methods upon invocation.
+
 ### Service endpoints
 
 The following table lists the endpoints of the microservice.
 
-| HTTP method | Endpoint         | Description              | Request body example                    | Response body example                                                                                                                               |
-|-------------|------------------|--------------------------|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| POST        | /payment_intents | Create a payment intent  | `{"amount": 200}`                       | `{"amount": 100, "paymentIntentId": "pi_000000000000000000000000", "clientSecret": "pi_000000000000000000000000_secret_0000000000000000000000000"}` |
-| PUT         | /payment_intents | Capture a payment intent | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "succeeded"}`                                                                         |
-| DELETE      | /payment_intents | Cancel a payment intent  | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "canceled"}`                                                                          |
+| HTTP method | Endpoint          | Description              | Request body example                    | Response body example                                                                                                                               |
+|-------------|-------------------|--------------------------|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `POST`      | `/payment_intent` | Create a payment intent  | `{"amount": 200}`                       | `{"amount": 100, "paymentIntentId": "pi_000000000000000000000000", "clientSecret": "pi_000000000000000000000000_secret_0000000000000000000000000"}` |
+| `PUT`       | `/payment_intent` | Confirm a payment intent | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "succeeded"}`                                                                         |
+| `DELETE`    | `/payment_intent` | Cancel a payment intent  | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "canceled"}`                                                                          |
+
+### Workflow
+
+The following workflow is used for payment operations with the microservice:
+
+1. Create a payment intent by sending a `POST` request to the `/payment_intents` endpoint. The response will contain the payment intent ID and client secret.
+2. Either:
+   1. Send a PUT request to the `/payment_intents` endpoint with the payment intent ID returned in the `POST` response to confirm the payment intent with Stripe; or
+   2. Send a DELETE request to the `/payment_intents` endpoint with the payment intent ID returned in the `POST` response to cancel the payment intent with Stripe.
 
 ### Authentication and Authorization
 
