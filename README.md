@@ -107,7 +107,7 @@ with a series of prompts:
 * **Stack Name**: The name of the stack to deploy to CloudFormation. This should be unique to your account and region, and a good starting point would be something matching your project name.
 * **AWS Region**: The AWS region you want to deploy your app to.
 * **Confirm changes before deploy**: If set to yes, any change sets will be shown to you before execution for manual review. If set to no, the AWS SAM CLI will automatically deploy application changes.
-* **Allow SAM CLI IAM role creation**: Many AWS SAM templates, including this example, create AWS IAM roles required for the AWS Lambda function(s) included to access AWS services. By default, these are scoped down to minimum required permissions. To deploy an AWS CloudFormation stack which creates or modifies IAM roles, the `CAPABILITY_IAM` value for `capabilities` must be provided. If permission isn't provided through this prompt, to deploy this example you must explicitly pass `--capabilities CAPABILITY_IAM` to the `sam deploy` command.
+* **Allow SAM CLI IAM role creation**: Many AWS SAM templates, including this implementation, create AWS IAM roles required for the AWS Lambda function(s) included to access AWS services. By default, these are scoped down to minimum required permissions. To deploy an AWS CloudFormation stack which creates or modifies IAM roles, the `CAPABILITY_IAM` value for `capabilities` must be provided. If permission isn't provided through this prompt, to deploy this implementation you must explicitly pass `--capabilities CAPABILITY_IAM` to the `sam deploy` command.
 * **Save arguments to samconfig.toml**: If set to yes, your choices will be saved to a configuration file inside the project, so that in the future you can just re-run `sam deploy` without parameters to deploy changes to your application.
 
 You can find your API Gateway Endpoint URL in the output values displayed after deployment.
@@ -127,7 +127,7 @@ either in your shell or via your IDE's runtime configuration.
 Build your application with the `sam build --use-container` command.
 
 ```bash
-stripe-ms$ sam build --use-container
+fhir-stripe-ms$ sam build --use-container
 ```
 
 The SAM CLI installs dependencies defined in `*/requirements.txt`, creates a deployment package, and saves it in the
@@ -139,14 +139,14 @@ function receives from the event source. Test events are included in the `events
 Run functions locally and invoke them with the `sam local invoke` command.
 
 ```bash
-stripe-ms$ sam local invoke CreatePaymentIntentFunction --event events/event.json
+fhir-stripe-ms$ sam local invoke CreatePaymentIntentFunction --event events/event.json
 ```
 
 The SAM CLI can also emulate your application's API. Use the `sam local start-api` to run the API locally on port 3000.
 
 ```bash
-stripe-ms$ sam local start-api
-stripe-ms$ curl http://localhost:3000/
+fhir-stripe-ms$ sam local start-api
+fhir-stripe-ms$ curl http://localhost:3000/
 ```
 
 The SAM CLI reads the application template to determine the API's routes and the functions that they invoke. The `Events` property
@@ -175,7 +175,7 @@ to help you quickly find the bug.
 `NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
 
 ```bash
-stripe-ms$ sam logs -n CreatePaymentIntentFunction --stack-name "fhir-stripe-ms" --tail
+fhir-stripe-ms$ sam logs -n CreatePaymentIntentFunction --stack-name "fhir-stripe-ms" --tail
 ```
 
 You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
@@ -185,10 +185,10 @@ You can find more information and examples about filtering Lambda function logs 
 Tests are defined in the `tests` folder in this project. Use PIP to install the test dependencies and run tests.
 
 ```bash
-stripe-ms$ pip install -r tests/requirements.txt --user
+fhir-stripe-ms$ pip install -r tests/requirements.txt --user
 # Integration test, requiring deploying the stack first and setting the STRIPE_SECRET_KEY environment variable.
 # Create the env variable AWS_SAM_STACK_NAME with the name of the stack we are testing
-stripe-ms$ AWS_SAM_STACK_NAME="fhir-stripe-ms" python -m pytest tests/test_handler_integration.py -v
+fhir-stripe-ms$ AWS_SAM_STACK_NAME="fhir-stripe-ms" python -m pytest tests/test_handler_integration.py -v
 ```
 
 ### Cleanup
