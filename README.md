@@ -40,6 +40,19 @@ The following table lists the endpoints of the microservice.
 | `PUT`       | `/payment_intent` | Confirm a payment intent | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "succeeded"}`                                                                         |
 | `DELETE`    | `/payment_intent` | Cancel a payment intent  | `{"id": "pi_000000000000000000000000"}` | `{"paymentIntentId": "pi_000000000000000000000000", "status": "canceled"}`                                                                          |
 
+### Error responses
+
+All error responses will have an appropriate HTTP status code other than `2nn` (typically in the `4nn` or `5nn` ranges) and a body with the following format:
+
+```json
+{
+   "error": "error_message",
+   "event": {...}
+}
+```
+
+Note that only some error responses include the `event` property, as appropriate.
+
 ### Workflow
 
 The following workflow is used for payment operations with the microservice:
