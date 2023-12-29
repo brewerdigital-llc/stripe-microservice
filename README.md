@@ -24,11 +24,11 @@ The AWS Toolkit is an open source plug-in for popular IDEs that uses the SAM CLI
 * [VS Code](https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/welcome.html)
 * [Visual Studio](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html)
 
-## Use the pre-deployed microservice
+## Use the Brewer-deployed microservice
 
 ### Base URL
 
-The base URL for the pre-deployed microservice is https://gozj2why30.execute-api.us-east-2.amazonaws.com/Prod.  You can use this URL to make requests to the microservice by appending the below endpoints and applying the corresponding HTTP methods upon invocation.
+The base URL for the Brewer-deployed microservice is https://gozj2why30.execute-api.us-east-2.amazonaws.com/Prod.  You can use this URL to make requests to the microservice by appending the below endpoints and applying the corresponding HTTP methods upon invocation.
 
 ### Service endpoints
 
