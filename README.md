@@ -72,7 +72,7 @@ You can find your API Gateway Endpoint URL in the output values displayed after 
 The following environment variables are required to run the application:
 * `STRIPE_API_KEY` - The API key to use for the Stripe API calls.
 
-For cloud operation, you can define these environment variables in the AWS Lambda console under each relevant function at https://us-east-2.console.aws.amazon.com/lambda/home?functions&region=us-east-2#/functions. For testing, you should define these either in your shell or viaa your IDE's runtime configuration.
+For cloud operation, you can define these environment variables in the AWS Lambda console under each relevant function at https://us-east-2.console.aws.amazon.com/lambda/home?functions&region=us-east-2#/functions. For testing, you should define these either in your shell or via your IDE's runtime configuration.
 
 ## Use the SAM CLI to build and test locally
 
