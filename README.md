@@ -55,6 +55,10 @@ You must supply the AWS API Gateway with a valid API key in the `X-Api-Key` head
 
 ## Build, configure, deploy, and test the microservice
 
+### Prerequisites
+
+You must create a Stripe account for each provider at https://dashboard.stripe.com/register.  You must also create an API key at https://dashboard.stripe.com/test/apikeys.
+
 ### Deploy the microservice
 
 The Serverless Application Model Command Line Interface (SAM CLI) is an extension of the AWS CLI that adds functionality for building and testing Lambda applications. It uses Docker to run your functions in an Amazon Linux environment that matches Lambda. It can also emulate your application's build environment and API.
@@ -85,7 +89,8 @@ You can find your API Gateway Endpoint URL in the output values displayed after 
 ### Environment variables
 
 The following environment variables are required to run the application:
-* `STRIPE_API_KEY` - The API key to use for the Stripe API calls.
+
+* `STRIPE_API_KEY` - The API key you created according to the instructions under **Prerequisites** above to use for the Stripe API calls.
 
 For cloud operation, you can define these environment variables in the AWS Lambda console under each relevant function at https://us-east-2.console.aws.amazon.com/lambda/home?functions&region=us-east-2#/functions. For testing, you should define these either in your shell or via your IDE's runtime configuration.
 
