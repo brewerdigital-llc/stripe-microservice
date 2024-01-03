@@ -1,12 +1,12 @@
 # stripe-ms: FHIR Stripe Microservice
 
-This project contains source code and supporting files for the FHIR Stripe serverless microservice application that you can deploy
-with the SAM CLI. It includes the following files and folders.
+This project contains source code and supporting files for the FHIR Stripe microservice application that provides Stripe payment services to the _VivoCare_ app.
+You can deploy it with the SAM CLI. It includes the following files and folders:
 
-- create_payment_intent, capture_payment_intent, and cancel_payment_intent - Code for the application's Lambda functions.
-- events - Invocation events that you can use to invoke the functions.
-- tests - Integration tests for the application code. 
-- template.yaml - A template that defines the application's AWS resources.
+- `create_payment_intent`, `capture_payment_intent`, and `cancel_payment_intent` - Code for the application's AWS Lambda functions.
+- `events` - Invocation events that you can use to invoke the functions.
+- `tests` - Integration tests for the application code. 
+- `template.yaml` - A template that defines the application's AWS resources.
 
 The application uses several AWS resources, including Lambda functions and an API Gateway API. These resources are defined in the
 `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that
@@ -28,6 +28,13 @@ started.
 * [DataGrip](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
 * [VS Code](https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/welcome.html)
 * [Visual Studio](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html)
+
+## Related source repositories
+
+This repository is part of the _VivoCare_ Health FHIR app project by Brewer Digital.  The other repositories are:
+
+* [_VivoCare_ app](https://github.com/brewerdigital-llc/VivoCare) - The cross-platform Canvas FHIR portal mobile app that uses the FHIR AI microservice.
+* [FHIR AI microservice](https://github.com/brewerdigital-llc/fhir-ai-ms) - The microservice that handles AI processing for _VivoCare_.
 
 ## Use the Brewer-deployed microservice
 
